@@ -6,15 +6,26 @@ const connectDB = async () => {
     await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,
+      serverSelectionTimeoutMS: 50000, // Increase timeout to 50 seconds
     });
-    console.log('MongoDB connected...');
+    console.log('MongoDB connected successfully.');
   } catch (err) {
     console.error('MongoDB connection error:', err.message);
-    process.exit(1);
+    process.exit(1); // Exit the app if the database connection fails
   }
 };
 
+// Debugging MongoDB connection
+mongoose.connection.on('connected', () => {
+  console.log('MongoDB connected.');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err.message);
+});
+
 module.exports = connectDB;
+
+
 
   

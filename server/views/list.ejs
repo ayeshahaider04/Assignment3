@@ -2,8 +2,10 @@
 <h2>Study Sessions</h2>
 <a href="/add" class="btn">Add New Session</a>
 <ul>
-  <% if (sessions.length === 0) { %>
+  <% if (sessions && sessions.length === 0) { %>
     <p>No study sessions found. Add a new one!</p>
+  <% } else if (!sessions) { %>
+    <p>Failed to load sessions. Please try again later.</p>
   <% } else { %>
     <% sessions.forEach(session => { %>
       <li>
@@ -18,6 +20,8 @@
   <% } %>
 </ul>
 <%- include('partials/footer') %>
+
+
 
 
 

@@ -10,7 +10,9 @@ router.get('/', (req, res) => {
 // List all study sessions
 router.get('/sessions', async (req, res) => {
   try {
+    console.log('Fetching study sessions from the database...');
     const sessions = await StudySession.find().sort({ date: 1 });
+    console.log('Study sessions fetched:', sessions);
     res.render('list', { sessions });
   } catch (err) {
     console.error('Error fetching sessions:', err.message);
@@ -70,4 +72,7 @@ router.post('/delete/:id', async (req, res) => {
 });
 
 module.exports = router;
+
+
+
 
