@@ -1,0 +1,17 @@
+<%- include('partials/header') %>
+<h2>Study Sessions</h2>
+<a href="/add" class="btn">Add New Session</a>
+<ul>
+  <% sessions.forEach(session => { %>
+    <li>
+      <strong><%= session.title %></strong>: <%= session.description %>
+      (<%= session.duration %> hours on <%= session.date.toDateString() %>)
+      <form action="/delete/<%= session._id %>" method="POST" style="display:inline;">
+        <button type="submit">Delete</button>
+      </form>
+      <a href="/edit/<%= session._id %>" class="btn">Edit</a>
+    </li>
+  <% }); %>
+</ul>
+<%- include('partials/footer') %>
+
