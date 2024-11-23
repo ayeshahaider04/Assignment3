@@ -16,3 +16,10 @@ const connectDB = async () => {
 };
 
 module.exports = connectDB;
+
+await mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    serverSelectionTimeoutMS: 50000, // Increase timeout to 50 seconds
+  });
+  
