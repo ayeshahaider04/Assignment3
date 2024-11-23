@@ -1,27 +1,33 @@
 const express = require('express');
 const path = require('path');
+const connectDB = require('./server/config/db');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the "public" directory
+// Connect to MongoDB
+connectDB();
+
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: true }));
+
+// Set static folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set views directory and view engine
+// Set EJS as the template engine
 app.set('views', path.join(__dirname, 'server', 'views'));
 app.set('view engine', 'ejs');
 
-// Middleware to parse URL-encoded form data
-app.use(express.urlencoded({ extended: true }));
-
-// Import and use routes
+// Routes
 const itemRoutes = require('./server/routes/items');
 app.use('/', itemRoutes);
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
+
 
 
 

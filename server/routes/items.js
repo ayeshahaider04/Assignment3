@@ -9,8 +9,13 @@ router.get('/', (req, res) => {
 
 // List all study sessions
 router.get('/sessions', async (req, res) => {
-  const sessions = await StudySession.find().sort({ date: 1 });
-  res.render('list', { sessions });
+  try {
+    const sessions = await StudySession.find().sort({ date: 1 });
+    res.render('list', { sessions });
+  } catch (err) {
+    console.error('Error fetching sessions:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Render Add Page
@@ -20,28 +25,49 @@ router.get('/add', (req, res) => {
 
 // Add a new study session
 router.post('/add', async (req, res) => {
-  const { title, description, date, duration } = req.body;
-  await new StudySession({ title, description, date, duration }).save();
-  res.redirect('/sessions');
+  try {
+    const { title, description, date, duration } = req.body;
+    await new StudySession({ title, description, date, duration }).save();
+    res.redirect('/sessions');
+  } catch (err) {
+    console.error('Error adding session:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Render Edit Page
 router.get('/edit/:id', async (req, res) => {
-  const session = await StudySession.findById(req.params.id);
-  res.render('edit', { session });
+  try {
+    const session = await StudySession.findById(req.params.id);
+    res.render('edit', { session });
+  } catch (err) {
+    console.error('Error fetching session:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Update a study session
 router.post('/edit/:id', async (req, res) => {
-  const { title, description, date, duration } = req.body;
-  await StudySession.findByIdAndUpdate(req.params.id, { title, description, date, duration });
-  res.redirect('/sessions');
+  try {
+    const { title, description, date, duration } = req.body;
+    await StudySession.findByIdAndUpdate(req.params.id, { title, description, date, duration });
+    res.redirect('/sessions');
+  } catch (err) {
+    console.error('Error updating session:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 // Delete a study session
 router.post('/delete/:id', async (req, res) => {
-  await StudySession.findByIdAndDelete(req.params.id);
-  res.redirect('/sessions');
+  try {
+    await StudySession.findByIdAndDelete(req.params.id);
+    res.redirect('/sessions');
+  } catch (err) {
+    console.error('Error deleting session:', err.message);
+    res.status(500).send('Internal Server Error');
+  }
 });
 
 module.exports = router;
+
