@@ -4,14 +4,19 @@
 <ul>
   <% sessions.forEach(session => { %>
     <li>
-      <strong><%= session.title %></strong>: <%= session.description %>
-      (<%= session.duration %> hours on <%= session.date.toDateString() %>)
-      <form action="/delete/<%= session._id %>" method="POST" style="display:inline;">
-        <button type="submit">Delete</button>
-      </form>
-      <a href="/edit/<%= session._id %>" class="btn">Edit</a>
+      <div>
+        <strong><%= session.title %></strong>: <%= session.description %>
+        (<%= session.duration %> hours on <%= session.date.toDateString() %>)
+      </div>
+      <div>
+        <form action="/delete/<%= session._id %>" method="POST" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+        <a href="/edit/<%= session._id %>" class="btn">Edit</a>
+      </div>
     </li>
   <% }); %>
 </ul>
 <%- include('partials/footer') %>
+
 
