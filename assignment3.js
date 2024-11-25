@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const connectDB = require('./server/config/db');
-require('dotenv').config();
+require('dotenv').config(); // Ensure dotenv is loaded
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -31,9 +31,6 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
-
-
-
 
 
 
