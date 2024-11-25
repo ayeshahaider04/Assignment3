@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-const MONGO_URI = process.env.MONGO_URI;
 
-console.log('MONGO_URI:', MONGO_URI); // Debug log to confirm MONGO_URI is loaded
+// Hardcoded MongoDB connection string
+const MONGO_URI = 'mongodb+srv://ayeshahaider:ayesha123@assignment3.mjqrv.mongodb.net/?retryWrites=true&w=majority&appName=Assignment3';
 
 const connectDB = async () => {
   try {
     await mongoose.connect(MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 50000,
+      serverSelectionTimeoutMS: 50000, // Timeout after 50 seconds
     });
     console.log('MongoDB connected successfully.');
   } catch (err) {
