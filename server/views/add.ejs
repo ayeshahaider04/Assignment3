@@ -1,15 +1,25 @@
-<%- include('partials/header') %>
+<%- include('partials/header') %> 
+
 <h2>Add Study Session</h2>
+
 <form action="/add" method="POST">
-  <input type="text" name="title" placeholder="Title" required>
-  <textarea name="description" placeholder="Description" required></textarea>
-  <input type="date" name="date" required>
-  <input type="number" name="duration" placeholder="Duration (hours)" required>
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title" placeholder="Title" required>
+
+  <label for="description">Description:</label>
+  <textarea id="description" name="description" placeholder="Description" required></textarea>
+
+  <label for="date">Date:</label>
+  <input type="date" id="date" name="date" required>
+
+  <label for="duration">Duration (hours):</label>
+  <input type="number" id="duration" name="duration" placeholder="Duration (hours)" required>
+
   <button type="submit">Add Session</button>
 </form>
+
 <a href="/sessions" class="btn">Back to Sessions</a>
+
 <%- include('partials/footer') %>
-
-
 
 

@@ -9,13 +9,12 @@ const PORT = process.env.PORT || 3000;
 // Connect to MongoDB
 connectDB();
 
-// Middleware to parse form data
+// Middleware
 app.use(express.urlencoded({ extended: true }));
-
-// Set static folder
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set EJS as the template engine
+// Template engine
 app.set('views', path.join(__dirname, 'server', 'views'));
 app.set('view engine', 'ejs');
 
@@ -23,10 +22,16 @@ app.set('view engine', 'ejs');
 const itemRoutes = require('./server/routes/items');
 app.use('/', itemRoutes);
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+// Error handling
+app.use((req, res) => res.status(404).render('404', { message: 'Page Not Found' }));
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).render('error', { message: 'An error occurred!' });
 });
+
+// Start server
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
+
 
 
 

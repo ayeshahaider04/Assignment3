@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Planner</title>
+  <title><%= title || 'Study Planner' %></title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <header>
   <h1>Study Planner</h1>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/sessions">Sessions</a></li>
+      <li><a href="/add">Add Session</a></li>
+    </ul>
+  </nav>
 </header>

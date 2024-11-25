@@ -1,6 +1,8 @@
 <%- include('partials/header') %>
+
 <h2>Study Sessions</h2>
 <a href="/add" class="btn">Add New Session</a>
+
 <ul>
   <% if (sessions && sessions.length === 0) { %>
     <p>No study sessions found. Add a new one!</p>
@@ -10,15 +12,16 @@
     <% sessions.forEach(session => { %>
       <li>
         <strong><%= session.title %></strong>: <%= session.description %>
-        (<%= session.duration %> hours on <%= session.date.toDateString() %>)
-        <form action="/delete/<%= session._id %>" method="POST" style="display:inline;">
-          <button type="submit">Delete</button>
-        </form>
+        (<%= session.duration %> hours on <%= new Date(session.date).toDateString() %>)
         <a href="/edit/<%= session._id %>" class="btn">Edit</a>
+        <form action="/delete/<%= session._id %>" method="POST" style="display:inline;">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
       </li>
     <% }); %>
   <% } %>
 </ul>
+
 <%- include('partials/footer') %>
 
 
